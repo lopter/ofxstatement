@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from setuptools import find_packages
+from setuptools import find_namespace_packages
 from setuptools.command.test import test as TestCommand
 from distutils.core import setup
 import unittest
@@ -47,13 +47,12 @@ setup(name='ofxstatement',
           'Environment :: Console',
           'Operating System :: OS Independent',
           'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'],
-      packages=find_packages('src'),
-      namespace_packages=["ofxstatement", "ofxstatement.plugins"],
+      packages=find_namespace_packages('src', exclude=['ofxstatement.tests', 'ofxstatement.tests.*']),
+      package_dir={'': 'src'},
       entry_points={
           'console_scripts':
           ['ofxstatement = ofxstatement.tool:run'],
           },
-      package_dir={'': 'src'},
       install_requires=['setuptools',
                         'appdirs>=1.3.0'
                         ],
